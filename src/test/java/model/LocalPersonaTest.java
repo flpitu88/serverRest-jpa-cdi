@@ -5,9 +5,6 @@
  */
 package model;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Month;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -40,13 +37,13 @@ public class LocalPersonaTest {
     @Test
     public void crudTest() {
         em.getTransaction().begin();
-        Persona p = new Persona("Flavio", "Pietrolati", Date.valueOf(LocalDate.of(1988, Month.JANUARY, 1)));
-        em.persist(p);
+        MotivoConsulta mc = new MotivoConsulta("este es un motivo");
+        em.persist(mc);
         em.getTransaction().commit();
         System.out.println("Se guardó el objeto");
-        Persona _p = em.find(Persona.class, 1);
-        Assert.assertNotNull(p.getId());
-        System.out.println("Encontrada persona #1:  " + _p.getNombre() + " " + _p.getApellido());        
+        MotivoConsulta _mc = em.find(MotivoConsulta.class, 1);
+        Assert.assertNotNull(_mc.getId());
+        System.out.println("Encontrado motivo consulta #1:  " + _mc.getMotivo());
     }
 
 }
