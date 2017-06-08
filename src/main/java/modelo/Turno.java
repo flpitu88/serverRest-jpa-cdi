@@ -3,43 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author flpitu88
  */
 @Entity
+@Table(schema = "jbossPrueba", uniqueConstraints
+        = @UniqueConstraint(columnNames = {"dia", "horario"}))
 public class Turno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Temporal(value = TemporalType.DATE)
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
+    @NotNull
     private LocalDate dia;
-    
+
     @Temporal(value = TemporalType.TIME)
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
+    @NotNull
     private LocalTime horario;
-    
+
     @Column(nullable = true)
     @OneToOne
     private Usuario usuario;
-    
+
     @Column(nullable = true)
     @OneToOne
     private MotivoConsulta motivo;
@@ -94,6 +102,40 @@ public class Turno implements Serializable {
 
     public void setMotivo(MotivoConsulta motivo) {
         this.motivo = motivo;
+    }
+
+    /**
+     * Si dos turnos refieren al mismo dia y horario, ya corresponden
+     * al mismo turno.
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Turno)) {
+            return false;
+        }
+        Turno other = (Turno) obj;
+        if (this.dia != other.getDia() || this.horario != other.getHorario()) {
+            return true;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.dia);
+        hash = 29 * hash + Objects.hashCode(this.horario);
+        return hash;
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package modelo;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -11,12 +11,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author flpitu88
  */
 @Entity
+@Table(schema = "jbossPrueba")
 public class MotivoConsulta implements Serializable {
 
     @Id
@@ -24,6 +27,7 @@ public class MotivoConsulta implements Serializable {
     private Integer id;
     
     @Column(length = 120, nullable = false)
+    @NotNull
     private String motivo;
 
     public MotivoConsulta() {

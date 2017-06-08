@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,9 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -22,6 +23,8 @@ import javax.validation.constraints.Pattern;
  * @author flpitu88
  */
 @Entity
+@Table(schema = "jbossPrueba", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"mail"})})
 public class Usuario implements Serializable {
 
     @Id
@@ -29,26 +32,33 @@ public class Usuario implements Serializable {
     private Integer id;
 
     @Column(length = 9, nullable = false)
+    @NotNull(message = "El DNI es obligatorio")
     private String dni;
 
     @Column(length = 45, nullable = false)
+    @NotNull(message = "El Nombre es obligatorio")
     private String nombre;
 
     @Column(length = 60, nullable = false)
+    @NotNull(message = "El Apellido es obligatorio")
     private String apellido;
 
     @Column(length = 100, nullable = false)
-    @Pattern(regexp = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$;")
+    @Pattern(
+            regexp = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$;",
+            message = "No se corresponde a un mail válido")
+    @NotNull(message = "El Mail es obligatorio")
     private String mail;
 
-    @Temporal(value = TemporalType.DATE)
     @Column(nullable = false)
+    @NotNull(message = "La Fecha de Nacimiento es obligatoria")
     private LocalDate fechaNacimiento;
 
     @Column(nullable = false)
     private Boolean administrador;
 
     @Column(length = 60, nullable = false)
+    @NotNull(message = "La contraseña es obligatoria")
     private String password;
 
     public Usuario() {
