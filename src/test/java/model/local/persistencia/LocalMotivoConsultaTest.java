@@ -5,17 +5,14 @@
  */
 package model.local.persistencia;
 
-import java.time.LocalDate;
-import java.time.Month;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import modelo.MotivoConsulta;
-import modelo.Usuario;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -27,14 +24,14 @@ public class LocalMotivoConsultaTest {
     private static EntityManagerFactory emf;
     private static EntityManager em;
 
-    @BeforeClass
-    public static void openDatabase() {
+    @Before
+    public void openDatabase() {
         emf = Persistence.createEntityManagerFactory("pUnitTest");
         em = emf.createEntityManager();
     }
 
-    @AfterClass
-    public static void closeDatabase() {
+    @After
+    public void closeDatabase() {
         em.close();
         emf.close();
     }

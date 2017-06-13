@@ -18,12 +18,13 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+
 /**
  *
  * @author flpitu88
  */
 @Entity
-@Table(schema = "jbossPrueba", uniqueConstraints = {
+@Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = {"mail"})})
 public class Usuario implements Serializable {
 

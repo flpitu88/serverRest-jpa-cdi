@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * @author flpitu88
  */
 @Entity
-@Table(schema = "jbossPrueba")
+@Table
 public class MotivoConsulta implements Serializable {
 
     @Id

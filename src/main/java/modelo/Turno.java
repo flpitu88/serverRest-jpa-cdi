@@ -14,10 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
@@ -26,7 +23,7 @@ import javax.validation.constraints.NotNull;
  * @author flpitu88
  */
 @Entity
-@Table(schema = "jbossPrueba", uniqueConstraints
+@Table(uniqueConstraints
         = @UniqueConstraint(columnNames = {"dia", "horario"}))
 public class Turno implements Serializable {
 
@@ -34,22 +31,18 @@ public class Turno implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Temporal(value = TemporalType.DATE)
     @Column(nullable = false, updatable = false)
     @NotNull
     private LocalDate dia;
 
-    @Temporal(value = TemporalType.TIME)
     @Column(nullable = false, updatable = false)
     @NotNull
     private LocalTime horario;
 
     @Column(nullable = true)
-    @OneToOne
     private Usuario usuario;
 
     @Column(nullable = true)
-    @OneToOne
     private MotivoConsulta motivo;
 
     public Turno() {
