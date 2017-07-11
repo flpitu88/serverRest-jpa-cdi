@@ -18,7 +18,7 @@ import modelo.MotivoConsulta;
 @Stateless
 public class MotivoConsultaDAODB implements MotivoConsultaDAO {
 
-    @PersistenceContext(unitName = "h2-pu")
+    @PersistenceContext(unitName = "h2")
     EntityManager entityMgr;
 
     @Override

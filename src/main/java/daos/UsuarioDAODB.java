@@ -18,7 +18,7 @@ import modelo.Usuario;
 @Stateless
 public class UsuarioDAODB implements UsuarioDAO {
 
-    @PersistenceContext(unitName = "h2-pu")
+    @PersistenceContext(unitName = "h2")
     EntityManager entityMgr;
 
     @Override
