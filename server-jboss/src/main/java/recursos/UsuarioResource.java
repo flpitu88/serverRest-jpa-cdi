@@ -6,6 +6,7 @@
 package recursos;
 
 import daos.UsuarioDAO;
+import java.time.LocalDate;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,6 +31,15 @@ public class UsuarioResource {
     private UsuarioDAO usuarioDao;
 
     @GET
+    @Path("trampa")
+    public Usuario crearUsuario(@Context UriInfo uriInfo) {
+        Usuario u = usuarioDao.getUsuarioById(1);
+        u.setFechaNacimiento(LocalDate.now());
+        
+        return u;
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> getUsuarios() {
         return usuarioDao.getUsuariosNoAdministradores();
@@ -47,6 +57,8 @@ public class UsuarioResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response crearUsuario(Usuario u, @Context UriInfo uriInfo) {
         usuarioDao.guardarUsuario(u);
+        u.setFechaNacimiento(LocalDate.now());
+        
         return Response
                 .created(uriInfo.getBaseUriBuilder()
                         .path(u.getId().toString())

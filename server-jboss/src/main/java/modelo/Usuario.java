@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -45,17 +44,18 @@ public class Usuario implements Serializable {
     private String apellido;
 
     @Column(length = 100, nullable = false)
-    @Pattern(
+    /*@Pattern(
             regexp = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$;",
-            message = "No se corresponde a un mail válido")
+            message = "No se corresponde a un mail válido")*/
     @NotNull(message = "El Mail es obligatorio")
     private String mail;
 
-    @Column(nullable = false)
-    @NotNull(message = "La Fecha de Nacimiento es obligatoria")
+    @Column(nullable = true)
+    //@NotNull(message = "La Fecha de Nacimiento es obligatoria")
     private LocalDate fechaNacimiento;
 
     @Column(nullable = false)
+    @NotNull
     private Boolean administrador;
 
     @Column(length = 60, nullable = false)
@@ -140,8 +140,8 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    @Transient
-    public String getNombreCompleto() {
+    
+    public String crearNombreCompleto() {
         return this.getNombre() + " " + this.getApellido();
     }
 }

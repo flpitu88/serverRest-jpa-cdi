@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.flpitu88.jboss</groupId>
-    <artifactId>server-jboss</artifactId>
+    <artifactId>parent-server-jboss</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -19,88 +19,20 @@
                 <groupId>org.jboss.bom</groupId>
                 <artifactId>jboss-eap-javaee7-with-tools</artifactId>
                 <version>${bomJboss.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
     
-    <dependencies>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>2.2.1.GA</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.3.0.Final</version>
-        </dependency>
-
-        <!--https://mvnrepository.com/artifact/javax.validation/validation-api--> 
-        <!--        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>       -->
-        <!-- https://mvnrepository.com/artifact/javax.ejb/javax.ejb-api -->
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax.ejb-api</artifactId>
-            <version>3.2</version>
-        </dependency>
-        <!--https://mvnrepository.com/artifact/com.h2database/h2--> 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.195</version>
-            <scope>test</scope>
-        </dependency>
-        <!--https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager--> 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <scope>provided</scope>
-            <version>5.0.12.Final</version>
-        </dependency>
-        <!--https://mvnrepository.com/artifact/junit/junit--> 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>      
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-            <type>jar</type>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>server-jboss</module>
+    </modules>    
     
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.2.0.Alpha6</version>
-            </plugin>
-        </plugins>
-    </build>
-    
+    <repositories>
+        <repository>
+            <id>mvnRepository</id>
+            <url>https://maven.repository.redhat.com/ga/</url>
+        </repository>
+    </repositories>
 </project>
