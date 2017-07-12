@@ -6,6 +6,7 @@
 package recursos;
 
 import daos.UsuarioDAO;
+import java.time.LocalDate;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -40,6 +41,15 @@ public class UsuarioResource {
     @Path("{id}")
     public Usuario getUsuarios(Integer id) {
         return usuarioDao.getUsuarioById(id);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/prueba")
+    public Usuario getUsuariosPrueba(Integer id) {
+//        Usuario u = usuarioDao.getUsuarioById(id);
+        Usuario u = new Usuario("12323", "Flavio", "Pietro", "mail@mail", LocalDate.now(), Boolean.FALSE, "234234");
+        return u;
     }
 
     @POST
