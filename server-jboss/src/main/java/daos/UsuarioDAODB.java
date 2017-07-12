@@ -7,6 +7,10 @@ package daos;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Usuario;
@@ -16,10 +20,12 @@ import modelo.Usuario;
  * @author flavio
  */
 @Stateless
+//@TransactionManagement(TransactionManagementType.BEAN)
+//@TransactionAttribute(value = TransactionAttributeType.NEVER)
 public class UsuarioDAODB implements UsuarioDAO {
 
-    @PersistenceContext(unitName = "h2")
-    EntityManager entityMgr;
+    @PersistenceContext
+    private EntityManager entityMgr;
 
     @Override
     public void guardarUsuario(Usuario u) {
