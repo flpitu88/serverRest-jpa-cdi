@@ -52,6 +52,15 @@ public class UsuarioResource {
         return usuarioDao.getUsuarioById(id);
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/prueba")
+    public Usuario getUsuariosPrueba(Integer id) {
+//        Usuario u = usuarioDao.getUsuarioById(id);
+        Usuario u = new Usuario("12323", "Flavio", "Pietro", "mail@mail", LocalDate.now(), Boolean.FALSE, "234234");
+        return u;
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

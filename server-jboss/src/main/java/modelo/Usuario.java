@@ -44,14 +44,14 @@ public class Usuario implements Serializable {
     private String apellido;
 
     @Column(length = 100, nullable = false)
-    /*@Pattern(
-            regexp = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$;",
-            message = "No se corresponde a un mail válido")*/
-    @NotNull(message = "El Mail es obligatorio")
+//    @Pattern(
+//            regexp = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$;",
+//            message = "No se corresponde a un mail válido")
+//    @NotNull(message = "El Mail es obligatorio")
     private String mail;
 
     @Column(nullable = true)
-    //@NotNull(message = "La Fecha de Nacimiento es obligatoria")
+//    @NotNull(message = "La Fecha de Nacimiento es obligatoria")
     private LocalDate fechaNacimiento;
 
     @Column(nullable = false)
